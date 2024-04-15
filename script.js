@@ -4,7 +4,7 @@ const image_graphic_center = document.querySelector("#image_graphic_center");
 const content_text_button = document.querySelector("#content_text_button");
 const image_graphic_buttom = document.querySelector("#image_graphic_buttom");
 
-//criando os 
+//criando as listas dos elementos que vão se alterar
 const texts_top = [
     'Projeto 01',
     'Projeto 02',
@@ -35,6 +35,7 @@ const images_buttom = [
 
 let indice = 0;
 
+//função que troca os conteudo dos elementos
 function edit_items() {
     content_text_top.innerText = texts_top[indice];
     content_text_button.innerText = texts_buttom[indice];
@@ -44,6 +45,8 @@ function edit_items() {
     indice = (indice + 1) % texts_top.length;
 }
 
+//chamando a função pela primeira vez
 edit_items();
 
+//chamando a função toda vez que passar o intervalo, para deixar dinamico o conteudo
 setInterval(edit_items, 2000);
