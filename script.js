@@ -1,4 +1,4 @@
-import * as OBC from "openbim-components";
+import { Components, SimpleScene, SimpleRenderer, OrthoPerspectiveCamera, FragmentIfcLoader } from "openbim-components";
 
 //selecionando os elementos html que vão ser alterados
 const content_text_top = document.querySelector("#content_text_top");
@@ -51,25 +51,25 @@ function limpar_viewer(){
 //função que exibe os arquivos ifc
 async function exibir_ifc(numero){
     limpar_viewer()
-    const viewer = new OBC.Components()
+    const viewer = new Components()
 
-    const sceneComponent = new OBC.SimpleScene(viewer)
+    const sceneComponent = new SimpleScene(viewer)
     sceneComponent.setup()
     viewer.scene = sceneComponent
     const scene = sceneComponent.get()
     scene.background = null
 
     const viewerContainer = document.querySelector("#viewer_container")
-    const rendererComponent = new OBC.SimpleRenderer(viewer, viewerContainer)
+    const rendererComponent = new SimpleRenderer(viewer, viewerContainer)
     viewer.renderer = rendererComponent
 
-    const cameraComponent = new OBC.OrthoPerspectiveCamera(viewer)
+    const cameraComponent = new OrthoPerspectiveCamera(viewer)
     viewer.camera = cameraComponent
 
     viewer.init()
     cameraComponent.updateAspect()
 
-    const ifcLoader = new OBC.FragmentIfcLoader(viewer)
+    const ifcLoader = new FragmentIfcLoader(viewer)
     ifcLoader.settings.wasm = {
         path: "https://unpkg.com/web-ifc@0.0.43/",
         absolute: true,
