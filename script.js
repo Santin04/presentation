@@ -1,3 +1,5 @@
+import * as OBC from "openbim-components";
+
 //selecionando os elementos html que vão ser alterados
 const content_text_top = document.querySelector("#content_text_top");
 const image_graphic_center = document.querySelector("#image_graphic_center");
@@ -21,17 +23,64 @@ const texts_buttom = [
 
 const images_center = [
     'images/teste01.png',
-    '',
     'images/teste01.png',
-    '',
+    'images/teste01.png',
+    'images/teste01.png',
 ];
 
 const images_buttom = [
     'images/teste02.png',
-    '',
     'images/teste02.png',
-    '',
+    'images/teste02.png',
+    'images/teste02.png',
 ];
+
+const arquivo_ifc = [
+    'files/file01.ifc',
+    'files/file02.ifc',
+    'files/file03.ifc',
+    'files/file04.ifc',
+]
+
+//função que limpa a div viewer
+function limpar_viewer(){
+    const viewerContainer = document.querySelector("#viewer_container")
+    viewerContainer.innerHTML = ``
+}
+
+//função que exibe os arquivos ifc
+async function exibir_ifc(numero){
+    limpar_viewer()
+    const viewer = new OBC.Components()
+
+    const sceneComponent = new OBC.SimpleScene(viewer)
+    sceneComponent.setup()
+    viewer.scene = sceneComponent
+    const scene = sceneComponent.get()
+    scene.background = null
+
+    const viewerContainer = document.querySelector("#viewer_container")
+    const rendererComponent = new OBC.SimpleRenderer(viewer, viewerContainer)
+    viewer.renderer = rendererComponent
+
+    const cameraComponent = new OBC.OrthoPerspectiveCamera(viewer)
+    viewer.camera = cameraComponent
+
+    viewer.init()
+    cameraComponent.updateAspect()
+
+    const ifcLoader = new OBC.FragmentIfcLoader(viewer)
+    ifcLoader.settings.wasm = {
+        path: "https://unpkg.com/web-ifc@0.0.43/",
+        absolute: true,
+    }
+
+    const arquivo = await fetch(arquivo_ifc[numero])
+    const data = await arquivo.arrayBuffer()
+    const buffer = new Uint8Array(data)
+    const model = await ifcLoader.load(buffer, "example")
+    scene.add(model)
+}
 
 let indice = 0;
 
@@ -42,6 +91,8 @@ function edit_items() {
     image_graphic_center.src = images_center[indice];
     image_graphic_buttom.src = images_buttom[indice];
 
+    exibir_ifc(indice)
+
     indice = (indice + 1) % texts_top.length;
 }
 
@@ -49,4 +100,4 @@ function edit_items() {
 edit_items();
 
 //chamando a função toda vez que passar o intervalo, para deixar dinamico o conteudo
-setInterval(edit_items, 2000);
+setInterval(edit_items, 10000);
