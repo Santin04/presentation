@@ -80,6 +80,8 @@ async function exibir_ifc(numero){
     const buffer = new Uint8Array(data)
     const model = await ifcLoader.load(buffer, "example")
     scene.add(model)
+
+    animate(model)
 }
 
 let indice = 0;
@@ -94,6 +96,12 @@ function edit_items() {
     exibir_ifc(indice)
 
     indice = (indice + 1) % texts_top.length;
+}
+
+function animate(model) {
+    requestAnimationFrame(() => animate(model));
+    model.rotation.y += 0.005;
+    viewer.renderer.render(viewer.scene, viewer.camera);
 }
 
 //chamando a função pela primeira vez
