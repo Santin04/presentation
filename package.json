@@ -5,9 +5,9 @@
   "main": "index.html",
   "type": "module",
   "scripts": {
-    "start": "npm run dev",
+    "start": "vite",
     "dev": "vite",
-    "build": "vite"
+    "build": "vite build"
   },
   "author": "",
   "license": "ISC",
