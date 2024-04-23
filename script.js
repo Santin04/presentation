@@ -1,40 +1,92 @@
 import { Components, SimpleScene, SimpleRenderer, OrthoPerspectiveCamera, FragmentIfcLoader } from "openbim-components";
 
-//selecionando os elementos html que vão ser alterados
-const content_text_top = document.querySelector("#content_text_top");
-const image_graphic_center = document.querySelector("#image_graphic_center");
-const content_text_button = document.querySelector("#content_text_button");
-const image_graphic_buttom = document.querySelector("#image_graphic_buttom");
+//PARTE DE ALTERAR OS ELEMENTOS HTML (DOM)
+//selecionando todos os elementos que vai ser alterado
+const title = document.querySelector("#title");
+const location = document.querySelector("#location");
+const info01 = document.querySelector("#info01");
+const info02 = document.querySelector("#info02");
+const info03 = document.querySelector("#info03");
+const valor01 = document.querySelector("#valor01");
+const valor02 = document.querySelector("#valor02");
+const valor03 = document.querySelector("#valor03");
+const valor04 = document.querySelector("#valor04");
+const graphic = document.querySelector("#graphic");
 
-//criando as listas dos elementos que vão se alterar
-const texts_top = [
-    'Projeto 01',
-    'Projeto 02',
-    'Projeto 03',
-    'Projeto 04',
+
+//lista com todos os valores que vão ser alterados
+const list_title = [
+    'UFV: RINCÃO',
+    'UFV: PIRACICABA',
+    'UFV: GRAMADO',
+    'UFV: GOIANIA',
 ];
 
-const texts_buttom = [
-    'Texto do projeto 01',
-    'Texto do projeto 02',
-    'Texto do projeto 03',
-    'Texto do projeto 04',
+const list_location = [
+    'SÃO PAULO - SP',
+    'SÃO PAULO - SP',
+    'GRAMADO - RS',
+    'GOIANIA - GO',
 ];
 
-const images_center = [
-    'images/teste01.png',
-    'images/teste01.png',
-    'images/teste01.png',
-    'images/teste01.png',
+const list_info01 = [
+    'Cliente: NAVI',
+    'Cliente: XBOX',
+    'Cliente: PUMA',
+    'Cliente: NIKE',
 ];
 
-const images_buttom = [
-    'images/teste02.png',
-    'images/teste02.png',
-    'images/teste02.png',
-    'images/teste02.png',
+const list_info02 = [
+    'PM: Pedro Santos',
+    'PM: Mateus Ramalho',
+    'PM: Lucas Oliveira',
+    'PM: Henrique Silva',
 ];
 
+const list_info03 = [
+    'Planner: Rayssa',
+    'Planner: Monica',
+    'Planner: Regina',
+    'Planner: Magali',
+];
+
+const list_valor01 = [
+    'CAPEX DE IMPLANTAÇÃO: R$1.000,00',
+    'CAPEX DE IMPLANTAÇÃO: R$2.000,00',
+    'CAPEX DE IMPLANTAÇÃO: R$3.000,00',
+    'CAPEX DE IMPLANTAÇÃO: R$4.000,00',
+];
+
+const list_valor02 = [
+    'TOTAL MEDIDO: R$1.000,00',
+    'TOTAL MEDIDO: R$2.000,00',
+    'TOTAL MEDIDO: R$3.000,00',
+    'TOTAL MEDIDO: R$4.000,00',
+];
+
+const list_valor03 = [
+    'CUSTO ACUMULADO: R$1.000,00',
+    'CUSTO ACUMULADO: R$2.000,00',
+    'CUSTO ACUMULADO: R$3.000,00',
+    'CUSTO ACUMULADO: R$4.000,00',
+];
+
+const list_valor04 = [
+    'MEDIÇÃO HOJE: R$1.000,00',
+    'MEDIÇÃO HOJE: R$2.000,00',
+    'MEDIÇÃO HOJE: R$3.000,00',
+    'MEDIÇÃO HOJE: R$4.000,00',
+];
+
+const list_graphic = [
+    '/images/teste01.png',
+    '/images/teste02.png',
+    '/images/teste01.png',
+    '/images/teste02.png',
+];
+
+//PARTE 3D
+//Selecionando os arquivos ifc que vão ser exibidos na tela
 const arquivo_ifc = [
     'files/file01.ifc',
     'files/file02.ifc',
@@ -44,64 +96,71 @@ const arquivo_ifc = [
 
 //função que limpa a div viewer
 function limpar_viewer(){
-    const viewerContainer = document.querySelector("#viewer_container")
-    viewerContainer.innerHTML = ``
+    const viewerContainer = document.querySelector("#viewer_container");
+    viewerContainer.innerHTML = ``;
 }
 
 //função que exibe os arquivos ifc
 async function exibir_ifc(numero){
-    limpar_viewer()
-    const viewer = new Components()
+    limpar_viewer();
+    const viewer = new Components();
 
-    const sceneComponent = new SimpleScene(viewer)
-    sceneComponent.setup()
-    viewer.scene = sceneComponent
-    const scene = sceneComponent.get()
-    scene.background = null
+    const sceneComponent = new SimpleScene(viewer);
+    sceneComponent.setup();
+    viewer.scene = sceneComponent;
+    const scene = sceneComponent.get();
+    scene.background = null;
 
-    const viewerContainer = document.querySelector("#viewer_container")
-    const rendererComponent = new SimpleRenderer(viewer, viewerContainer)
-    viewer.renderer = rendererComponent
+    const viewerContainer = document.querySelector("#viewer_container");
+    const rendererComponent = new SimpleRenderer(viewer, viewerContainer);
+    viewer.renderer = rendererComponent;
 
-    const cameraComponent = new OrthoPerspectiveCamera(viewer)
-    viewer.camera = cameraComponent
+    const cameraComponent = new OrthoPerspectiveCamera(viewer);
+    viewer.camera = cameraComponent;
 
-    viewer.init()
-    cameraComponent.updateAspect()
+    viewer.init();
+    cameraComponent.updateAspect();
 
-    const ifcLoader = new FragmentIfcLoader(viewer)
+    const ifcLoader = new FragmentIfcLoader(viewer);
     ifcLoader.settings.wasm = {
         path: "https://unpkg.com/web-ifc@0.0.43/",
         absolute: true,
-    }
+    };
 
-    const arquivo = await fetch(arquivo_ifc[numero])
-    const data = await arquivo.arrayBuffer()
-    const buffer = new Uint8Array(data)
-    const model = await ifcLoader.load(buffer, "example")
-    scene.add(model)
+    const arquivo = await fetch(arquivo_ifc[numero]);
+    const data = await arquivo.arrayBuffer();
+    const buffer = new Uint8Array(data);
+    const model = await ifcLoader.load(buffer, "example");
+    scene.add(model);
 
-    animate(model)
-}
-
-let indice = 0;
-
-//função que troca os conteudo dos elementos
-function edit_items() {
-    content_text_top.innerText = texts_top[indice];
-    content_text_button.innerText = texts_buttom[indice];
-    image_graphic_center.src = images_center[indice];
-    image_graphic_buttom.src = images_buttom[indice];
-
-    exibir_ifc(indice)
-
-    indice = (indice + 1) % texts_top.length;
+    animate(model);
 }
 
 function animate(model) {
     requestAnimationFrame(() => animate(model));
     model.rotation.y += 0.005;
     viewer.renderer.render(viewer.scene, viewer.camera);
+}
+
+let indice = 0;
+
+//CHAMANDO AS FUNÇÕES 3D E DOM
+//função que troca os conteudo dos elementos
+function edit_items() {
+    title.innerText = list_title[indice];
+    location.innerText = list_location[indice];
+    info01.innerText = list_info01[indice];
+    info02.innerText = list_info02[indice];
+    info03.innerText = list_info03[indice];
+    valor01.innerText = list_valor01[indice];
+    valor02.innerText = list_valor02[indice];
+    valor03.innerText = list_valor03[indice];
+    valor04.innerText = list_valor04[indice];
+    graphic.src = list_graphic[indice];
+
+    exibir_ifc(indice);
+
+    indice = (indice + 1) % arquivo_ifc.length;
 }
 
 //chamando a função pela primeira vez
