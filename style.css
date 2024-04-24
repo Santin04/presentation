@@ -12,6 +12,10 @@
     color: black;
     overflow: hidden;
     font-family: 'Verdana', sans-serif;
+    background-image: url('/images/fundo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 #content-left {
@@ -36,7 +40,7 @@
 }
 
 #logotipo, #logo, #container_graphic, #graphic {
-    width: 300px;
+    width: 250px;
 }
 
 #logotipo, #container_graphic {
@@ -44,15 +48,15 @@
 }
 
 #title {
-    font-size: 35px;
+    font-size: 32px;
     font-weight: bold;
 }
 
 p {
-    font-size: 18px;
+    font-size: 15px;
 }
 
 h3 {
-    font-size: 18px;
+    font-size: 15px;
     font-weight: bold;
 }
