@@ -1,0 +1,5 @@
+[build]
+  command = "npx vite build"
+  publish = "public"
+[build.environment]
+  GIT_LFS_ENABLED = "true"
