@@ -4,3 +4,4 @@
 /dist/files/file02.ifc filter=lfs diff=lfs merge=lfs -text
 /public/files/file03.ifc filter=lfs diff=lfs merge=lfs -text
 /dist/files/file03.ifc filter=lfs diff=lfs merge=lfs -text
+*.ifc filter=lfs diff=lfs merge=lfs -text
