@@ -4,6 +4,7 @@ import { Components, SimpleScene, SimpleRenderer, OrthoPerspectiveCamera, Fragme
 //selecionando todos os elementos que vai ser alterado
 const title = document.querySelector("#title");
 const location = document.querySelector("#location");
+const info00 = document.querySelector("#info00");
 const info01 = document.querySelector("#info01");
 const info02 = document.querySelector("#info02");
 const info03 = document.querySelector("#info03");
@@ -16,73 +17,69 @@ const graphic = document.querySelector("#graphic");
 
 //lista com todos os valores que vão ser alterados
 const list_title = [
+    'UFV: CONSERVATÓRIA',
+    'UFV: ITU',
     'UFV: RINCÃO',
-    'UFV: PIRACICABA',
-    'UFV: GRAMADO',
-    'UFV: GOIANIA',
 ];
 
 const list_location = [
-    'SÃO PAULO - SP',
-    'SÃO PAULO - SP',
-    'GRAMADO - RS',
-    'GOIANIA - GO',
+    'CONSERVATÓRIA - RJ',
+    'ITU - SP',
+    'RINCÃO - SP',
+];
+
+const list_info00 = [
+    'Geração: 1MWp',
+    'Geração: 4MWp',
+    'Geração: 4MWp',
 ];
 
 const list_info01 = [
+    'Cliente: 499',
     'Cliente: NAVI',
-    'Cliente: XBOX',
-    'Cliente: PUMA',
-    'Cliente: NIKE',
+    'Cliente: NAVI',
 ];
 
 const list_info02 = [
-    'PM: Pedro Santos',
-    'PM: Mateus Ramalho',
-    'PM: Lucas Oliveira',
-    'PM: Henrique Silva',
+    'PM: Augusto',
+    'PM: Augusto',
+    'PM: Pedro',
 ];
 
 const list_info03 = [
+    'Planner: Diojnes',
     'Planner: Rayssa',
-    'Planner: Monica',
-    'Planner: Regina',
-    'Planner: Magali',
+    'Planner: Rayssa',
 ];
 
 const list_valor01 = [
     'CAPEX DE IMPLANTAÇÃO: R$1.000,00',
     'CAPEX DE IMPLANTAÇÃO: R$2.000,00',
     'CAPEX DE IMPLANTAÇÃO: R$3.000,00',
-    'CAPEX DE IMPLANTAÇÃO: R$4.000,00',
 ];
 
 const list_valor02 = [
     'TOTAL MEDIDO: R$1.000,00',
     'TOTAL MEDIDO: R$2.000,00',
     'TOTAL MEDIDO: R$3.000,00',
-    'TOTAL MEDIDO: R$4.000,00',
 ];
 
 const list_valor03 = [
     'CUSTO ACUMULADO: R$1.000,00',
     'CUSTO ACUMULADO: R$2.000,00',
     'CUSTO ACUMULADO: R$3.000,00',
-    'CUSTO ACUMULADO: R$4.000,00',
 ];
 
 const list_valor04 = [
     'MEDIÇÃO HOJE: R$1.000,00',
     'MEDIÇÃO HOJE: R$2.000,00',
     'MEDIÇÃO HOJE: R$3.000,00',
-    'MEDIÇÃO HOJE: R$4.000,00',
 ];
 
 const list_graphic = [
     '/images/teste01.png',
     '/images/teste02.png',
     '/images/teste01.png',
-    '/images/teste02.png',
 ];
 
 //PARTE 3D
@@ -91,7 +88,6 @@ const arquivo_ifc = [
     'files/file01.ifc',
     'files/file02.ifc',
     'files/file03.ifc',
-    'files/file04.ifc',
 ]
 
 //função que limpa a div viewer
@@ -149,6 +145,7 @@ let indice = 0;
 function edit_items() {
     title.innerText = list_title[indice];
     location.innerText = list_location[indice];
+    info00.innerText = list_info00[indice];
     info01.innerText = list_info01[indice];
     info02.innerText = list_info02[indice];
     info03.innerText = list_info03[indice];
@@ -167,4 +164,4 @@ function edit_items() {
 edit_items();
 
 //chamando a função toda vez que passar o intervalo, para deixar dinamico o conteudo
-setInterval(edit_items, 10000);
+setInterval(edit_items, 40000);

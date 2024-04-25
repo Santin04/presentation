@@ -29,6 +29,7 @@
 #content-right {
     width: 70%;
     height: 100%;
+    padding-right: 160px;
 }
 
 #viewer_container{
@@ -39,7 +40,11 @@
     overflow: hidden;
 }
 
-#logotipo, #logo, #container_graphic, #graphic {
+#logotipo, #logo {
+    width: 450px;
+}
+
+#container_graphic, #graphic {
     width: 250px;
 }
 
