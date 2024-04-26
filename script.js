@@ -85,9 +85,9 @@ const list_graphic = [
 //PARTE 3D
 //Selecionando os arquivos ifc que vão ser exibidos na tela
 const arquivo_ifc = [
-    'files/file01.ifc',
-    'files/file02.ifc',
-    'files/file03.ifc',
+    'files/file001.ifc',
+    'files/file002.ifc',
+    'files/file003.ifc',
 ]
 
 //função que limpa a div viewer
