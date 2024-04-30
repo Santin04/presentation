@@ -1,7 +1,7 @@
 import { Components, SimpleScene, SimpleRenderer, OrthoPerspectiveCamera, FragmentIfcLoader } from "openbim-components";
 
 //PARTE DE ALTERAR OS ELEMENTOS HTML (DOM)
-//selecionando todos os elementos que vai ser alterado
+//selecionando os elementos que vai ser alterado
 const title = document.querySelector("#title");
 const location = document.querySelector("#location");
 const info00 = document.querySelector("#info00");
