@@ -129,13 +129,14 @@ async function exibir_ifc(numero){
     const model = await ifcLoader.load(buffer, "example");
     scene.add(model);
 
-    animate(model);
+    requestAnimationFrame(() => {
+        animate(model);
+    });
 }
 
 function animate(model) {
     requestAnimationFrame(() => animate(model));
     model.rotation.y += 0.005;
-    viewer.renderer.render(viewer.scene, viewer.camera);
 }
 
 let indice = 0;
